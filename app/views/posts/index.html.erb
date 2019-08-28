@@ -1,28 +1,40 @@
-<% if user_signed_in? %>
-  <%= link_to current_user.name, edit_user_registration_path %>
-  <%= link_to "Add New Post", new_post_path, class: "button" %>
-  <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
-<% else %>
-  <%= link_to "Sign In", new_user_session_path %>
-  <%= link_to "Sign Up", new_user_registration_path, class: "button" %>
-<% end %>
+<div class="layout">
+  <div class="wrap">
+    <div class="tem_header clearfix">
+      <% if user_signed_in? %>
+        <ul>
+          <li><%= link_to current_user.name, edit_user_registration_path %></li>
+          <li><%= link_to "Add New Post", new_post_path, class: "button" %></li>
+          <li><%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>
+        </ul>        
+      <% else %>
+        <ul>
+          <li><%= link_to "Sign In", new_user_session_path %></li>
+          <li><%= link_to "Sign Up", new_user_registration_path, class: "button" %></li>
+        </ul>
+      <% end %>
+    </div>
+
+    <div class="tem_visual">
+      <% if user_signed_in? %>
+        Hello, <%= current_user.name %>
+        How are you TODAY? :D
+      <% else %>
+        Welcome Everyone :D
+      <% end %>
+    </div>
 
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+    <% @posts.each do |post| %>
+      <div class="tem_ctnbox clearfix">
+        <%= link_to (image_tag post.image.url(:small)),post %>
+        <h2><%= link_to post.title, post %></h2>
+        <h3>Shared by <%= post.user.name %></h3>
+        <p><%= post.comments.count %> Comments</p>
+        <p><%= post.get_likes.size %> Likes</p>
+      </div>
+    <% end %>
 
 
-
-
-<% @posts.each do |post| %>
-  <%= link_to (image_tag post.image.url(:small)),post %>
-  <h2><%= link_to post.title, post %></h2>
-  <p><%= post.comments.count %> Comments</p>
-  <p><%= post.get_likes.size %> Likes</p>
-<% end %>
-
+  </div>
+</div>

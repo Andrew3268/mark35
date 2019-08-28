@@ -1,0 +1,9 @@
+/* Index Page */
+.tem_header{margin:30px 0 50px 0;}
+.tem_header ul{}
+.tem_header ul li{float:left;margin-right:50px;}
+
+.tem_visual{margin:0 auto 50px auto;text-align:center;}
+
+.tem_ctnbox{float:left;width:31.33%;margin:1%;}
+.tem_ctnbox img{width:100%;object-fit:contain;height:250px;}

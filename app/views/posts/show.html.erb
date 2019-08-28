@@ -1,26 +1,63 @@
-<%= image_tag @post.image.url(:medium) %>
-<h1><%= @post.title %></h1>
-<p><%= @post.link %></p>
-<p><%= @post.description %></p>
-<p><%= @post.user.name %></p>
-<p><%= @post.get_upvotes.size %> Likes</p>
-<p><%= @post.get_downvotes.size %> Dislikes</p>
-<%= link_to "Like", like_post_path(@post), method: :get %>
-<%= link_to "Dislike", dislike_post_path(@post), method: :get %>
+<div class="layout">
+  <div class="wrap">
+    <h1><%= @post.title %></h1>
+    <h3>Shared by <%= @post.user.name %> about <%= time_ago_in_words(@post.created_at) %> ago</h3>
+    <%= image_tag @post.image.url(:medium) %>
+    <p><%= @post.link %></p>
+    <!-- <p><%= @post.description %></p>  -->
+    <p><%= simple_format(@post.description) %></p>
+    <p><%= @post.user.name %></p>
+    <p><%= @post.get_upvotes.size %> Likes</p>
+    <p><%= @post.get_downvotes.size %> Dislikes</p>
 
 
-<div id="comment">
- <h2 class="comment_count"><%= pluralize(@post.comments.count, "Comment") %></h2>
-  <% @comments.each do |comment| %>
-    <div class="comment">
-      <p class="username"><%= comment.user.name %></p>
-      <p class="content"><%= comment.content %></p>
+    <!-- 좋아요 및 갯수-->
+    <%= link_to like_post_path(@post), method: :get, class: "data" do %>
+      <%= pluralize(@post.get_upvotes.size, "Like") %>
+    <% end %>
+    <%= link_to dislike_post_path(@post), method: :get, class: "data" do %>
+      <%= pluralize(@post.get_downvotes.size, "Dislike") %>
+    <% end %>
+
+    <!-- 댓글 갯수-->
+    <%= pluralize(@post.comments.count, "Comment") %>
+
+    <!--
+    <%= link_to "Like", like_post_path(@post), method: :get %>
+    <%= link_to "Dislike", dislike_post_path(@post), method: :get %>
+    -->
+
+    <div id="comment">
+     <h2 class="comment_count"><%= pluralize(@post.comments.count, "Comment") %></h2>
+      <% @comments.each do |comment| %>
+        <div class="comment">
+          <p class="username"><%= comment.user.name %></p>
+          <p class="content"><%= comment.content %></p>
+        </div>
+        <% if comment.user == current_user %>
+          <%= link_to 'Delete', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      <% end %>
+      <%= render 'comments/form' %>
     </div>
-  <% end %>
-  <%= render 'comments/form' %>
+
+    <%= link_to "HOME", root_path %>
+    <% if @post.user == current_user %>
+      <%= link_to "EDIT", edit_post_path(@post) %>
+      <%= link_to "DELETE", post_path(@post), method: :delete, data: { confirm: "Are you sure?" } %>
+    <% end %>
+
+
+    <br />
+    <br />
+    <br />
+
+    <!-- 랜덤 포스터 *현재 페이지 컨텐츠 제외 -->
+    <%= link_to (image_tag @random_post.image.url(:small)), post_path(@random_post) %>
+    <%= link_to @random_post.title, post_path(@random_post) %>
+    Shared by <%= @random_post.user.name %>
+    <%= @random_post.comments.count %>
+    <%= @random_post.get_likes.size %>
+    
+  </div>
 </div>
-
-
-<%= link_to "HOME", root_path %>
-<%= link_to "EDIT", edit_post_path(@post) %>
-<%= link_to "DELETE", post_path(@post), method: :delete, data: { confirm: "Are you sure?" } %>
