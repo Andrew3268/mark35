@@ -1,0 +1,10 @@
+<%= image_tag @buy.buy_image.url(:medium) %>
+<h1><%= @buy.title %></h1>
+<p><%= @buy.link %></p>
+<p><%= @buy.description %></p>
+<p><%= @buy.user.name %></p>
+
+
+<%= link_to "HOME", root_path %>
+<%= link_to "EDIT", edit_buy_path(@buy) %>
+<%= link_to "DELETE", buy_path(@buy), method: :delete, data: { confirm: 'Are you sure?' } %>

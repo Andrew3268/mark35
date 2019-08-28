@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190828190920) do
+ActiveRecord::Schema.define(version: 20190828224515) do
+
+  create_table "buys", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title"
+    t.string "link"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "buy_image_file_name"
+    t.string "buy_image_content_type"
+    t.bigint "buy_image_file_size"
+    t.datetime "buy_image_updated_at"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text "content"

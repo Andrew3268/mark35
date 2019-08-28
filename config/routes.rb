@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   devise_for :users
+  
   resources :posts do
     member do 
       get "like", to: "posts#upvote"
@@ -8,8 +9,12 @@ Rails.application.routes.draw do
     end
     resources :comments
   end
-  
-  root 'posts#index'
+  # root 'posts#index'
+
+  resources :buys do
+    resources :comments
+  end
+  root 'buys#index'
 
 
 end
