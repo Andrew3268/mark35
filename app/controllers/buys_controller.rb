@@ -1,7 +1,7 @@
 class BuysController < ApplicationController
 
   before_action :find_buy, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @buys = Buy.all.order("created_at DESC")
