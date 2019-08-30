@@ -9,7 +9,7 @@ gem 'simple_form', '~> 4.1'
 gem 'devise', '~> 4.7'
 gem 'paperclip', '~> 6.1'
 gem 'acts_as_votable', '~> 0.12.1'
-
+gem 'rails_admin', '~> 2.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.7'

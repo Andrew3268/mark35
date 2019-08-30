@@ -1,6 +1,6 @@
 class BuysController < ApplicationController
 
-  before_action :find_buy, only: [:show, :edit, :update, :destroy]
+  before_action :find_buy, only: [:show, :edit, :update, :destroy, :user_page]
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
@@ -8,7 +8,6 @@ class BuysController < ApplicationController
   end
 
   def show
-    @comments = Comment.where(buy_id: @buy)
   end
 
   def new

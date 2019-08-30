@@ -4,8 +4,9 @@
       <% if user_signed_in? %>
         <ul>
           <li><%= link_to current_user.name, edit_user_registration_path %></li>
-          <li><a href="/buyusers/user_page">내 견적요청 내역</a></li>
+          <li><%= link_to "구매대행신청", new_buy_path, class: "button" %></li>
           <li><%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>
+          <li><%= link_to "HOME", root_path %></li>
         </ul>        
       <% else %>
         <ul>
@@ -13,11 +14,6 @@
           <li><%= link_to "Sign Up", new_user_registration_path, class: "button" %></li>
         </ul>
       <% end %>
-      <ul>
-        <li><%= link_to "구매대행신청", new_buy_path, class: "button" %></li>
-        <li><a href="#n">배송대행신청</a></li>
-        <li><a href="/">HOME</a></li>
-      </ul>
     </div>
 
     <div class="tem_visual">
@@ -28,15 +24,17 @@
         Welcome Everyone :D
       <% end %>
     </div>
-    
-    <% @buys.each do |buy| %>
-      <div class="tem_ctnbox clearfix">
-        <%= link_to (image_tag buy.buy_image.url(:small)), buy %>
-        <h2><%= link_to buy.title, buy %></h2>
-        <h3>Shared by <%= buy.user.name %></h3>
-      </div>
-    <% end %>
 
+    <% @buys.each do |buy| %>
+      <% if buy.user == current_user %>
+        <div class="tem_ctnbox clearfix">
+          <%= link_to (image_tag buy.buy_image.url(:small)), buy %>
+          <h2><%= link_to buy.title, buy %></h2>
+          <h3>Shared by <%= buy.user.name %></h3>
+        </div>
+      <% end %>
+    <% end %>
+    
 
   </div>
 </div>

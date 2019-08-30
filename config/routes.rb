@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   devise_for :users
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   
   resources :posts do
     member do 
@@ -9,12 +10,14 @@ Rails.application.routes.draw do
     end
     resources :comments
   end
-  # root 'posts#index'
+  root 'posts#index'
 
   resources :buys do
     resources :comments
   end
-  root 'buys#index'
+  # root 'buys#index'
+  # get '/buys/user_page', to: 'buys#user_page', as: 'user_page'
+  get 'buyusers/user_page'
 
 
 end

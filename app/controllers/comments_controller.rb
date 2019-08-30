@@ -14,16 +14,6 @@ class CommentsController < ApplicationController
       render 'new'
     end
 
-    @buy = Buy.find(params[:buy_id])
-    @comment = Comment.create(params[:comment].permit(:content))
-    @comment.user_id = current_user.id
-    @comment.buy_id = @buy.id
-
-    if @comment.save
-      redirect_to buy_path(@buy)
-    else
-      render 'new'
-    end
   end
 
   def destroy

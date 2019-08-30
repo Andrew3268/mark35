@@ -13,6 +13,10 @@
           <li><%= link_to "Sign Up", new_user_registration_path, class: "button" %></li>
         </ul>
       <% end %>
+      <ul>
+        <li><a href="/buys">구매대행</li>
+          <li><a href="#n">배송대행</a></li>
+      </ul>
     </div>
 
     <div class="tem_visual">
@@ -22,7 +26,10 @@
       <% else %>
         Welcome Everyone :D
       <% end %>
+      
+
     </div>
+
 
 
     <% @posts.each do |post| %>
