@@ -7,13 +7,9 @@ class CommentsController < ApplicationController
     @comment = Comment.create(params[:comment].permit(:content))
     @comment.user_id = current_user.id
     @comment.post_id = @post.id
+    @comment.save
 
-    if @comment.save
-      redirect_to post_path(@post)
-    else
-      render 'new'
-    end
-
+    
   end
 
   def destroy

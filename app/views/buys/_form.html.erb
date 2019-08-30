@@ -1,8 +1,10 @@
 <%= simple_form_for @buy do |f| %>
   <%= f.input :buy_image %>
   <%= f.input :title %>
-  <%= f.input :link %>
   <%= f.input :description %>
+  <% if current_user.try(:admin?) %>
+    <%= f.select :link, options_for_select([["견적완료?", ""], "YES"])%>
+  <% end %>
 
   <%= f.button :submit %>
 <% end %>

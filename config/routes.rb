@@ -12,9 +12,7 @@ Rails.application.routes.draw do
   end
   root 'posts#index'
 
-  resources :buys do
-    resources :comments
-  end
+  resources :buys 
   # root 'buys#index'
   # get '/buys/user_page', to: 'buys#user_page', as: 'user_page'
   get 'buyusers/user_page'

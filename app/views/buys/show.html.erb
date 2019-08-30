@@ -6,5 +6,7 @@
 
 
 <%= link_to "HOME", root_path %>
-<%= link_to "EDIT", edit_buy_path(@buy) %>
-<%= link_to "DELETE", buy_path(@buy), method: :delete, data: { confirm: 'Are you sure?' } %>
+<% if @buy.user == current_user %>
+  <%= link_to "EDIT", edit_buy_path(@buy) %>
+  <%= link_to "DELETE", buy_path(@buy), method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>

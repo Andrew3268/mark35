@@ -34,6 +34,15 @@
         <%= link_to (image_tag buy.buy_image.url(:small)), buy %>
         <h2><%= link_to buy.title, buy %></h2>
         <h3>Shared by <%= buy.user.name %></h3>
+        <% if buy.user == current_user || current_user.try(:admin?) %>
+        <!-- Admin can see all users posts but all users can not see admin's posts -->
+          <%= link_to "EDIT", edit_buy_path(buy) %>
+          <%= link_to "DELETE", buy_path(buy), method: :delete, data: { confirm: "Are you sure?" } %>
+        <% end %>
+        <% if buy.link.present? %>
+          <div class="tem_confirm"><%= buy.link %></div>
+          <p>견적 완료</p>
+        <% end %>
       </div>
     <% end %>
 

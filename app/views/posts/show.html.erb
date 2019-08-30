@@ -27,22 +27,16 @@
     <%= link_to "Dislike", dislike_post_path(@post), method: :get %>
     -->
 
-    <div id="comment">
+    <div id="comment_pane">
      <h2 class="comment_count"><%= pluralize(@post.comments.count, "Comment") %></h2>
       <% @comments.each do |comment| %>
-        <div class="comment">
-          <p class="username"><%= comment.user.name %></p>
-          <p class="content"><%= comment.content %></p>
-        </div>
-        <% if comment.user == current_user %>
-          <%= link_to 'Delete', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
-        <% end %>
+        <%= render 'comments/comment', comment: comment %>
       <% end %>
       <%= render 'comments/form' %>
     </div>
 
     <%= link_to "HOME", root_path %>
-    <% if @post.user == current_user && current_user.admin %>
+    <% if current_user.try(:admin?) %>
       <%= link_to "EDIT", edit_post_path(@post) %>
       <%= link_to "DELETE", post_path(@post), method: :delete, data: { confirm: "Are you sure?" } %>
     <% end %>
@@ -61,3 +55,4 @@
     
   </div>
 </div>
+

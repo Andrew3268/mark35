@@ -7,3 +7,5 @@
 
 .tem_ctnbox{float:left;width:31.33%;margin:1%;}
 .tem_ctnbox img{width:100%;object-fit:contain;height:250px;}
+.tem_ctnbox .tem_confirm{display:none;}
+.tem_ctnbox p{font-size:20px;color:#08f;}
